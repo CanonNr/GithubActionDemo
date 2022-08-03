@@ -31,8 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Aliyun image registry
+        environment: AliyunImageRegistry
         uses: docker/login-action@v2
         with:
-          registry: ${{ env.ALIYUNIMAGEREGISTRYADDRESS }}
-          username: ${{ env.ALIYUNIMAGEREGISTRYPASSWORD }}
-          password: ${{ env.ALIYUNIMAGEREGISTRYUSERNAME }}
+          registry: ${{ env.ADDRESS }}
+          username: ${{ env.PASSWORD }}
+          password: ${{ env.USERNAME }}
