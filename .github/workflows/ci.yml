@@ -4,6 +4,7 @@ on:
     branches:
       - master
 jobs:
+  # 步骤一 自动执行单元测试
   job1:
     runs-on: ubuntu-latest
     steps:
@@ -14,3 +15,15 @@ jobs:
           distribution: 'adopt'
       - name: Run the Maven verify phase
         run: mvn --batch-mode --update-snapshots verify
+  # 步骤二 构建jar包
+  job2:
+    need: job1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Run the Maven verify phase
+        run: mvn --batch-mode --update-snapshots package
