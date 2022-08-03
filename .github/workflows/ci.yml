@@ -28,12 +28,9 @@ jobs:
         run: mvn --batch-mode --update-snapshots package
   # 根据dockerfile构建镜像并发布到镜像仓库
   publish-image:
-    needs: [login-registry,package]
+    #needs: [login-registry,package]
     runs-on: ubuntu-latest
     steps:
       - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: github-action-demo:latest
+        run: |
+          cat ../../Dockerfile
