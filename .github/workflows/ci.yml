@@ -27,3 +27,12 @@ jobs:
           distribution: 'adopt'
       - name: Run the Maven verify phase
         run: mvn --batch-mode --update-snapshots package
+  job3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Aliyun image registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.ALIYUNIMAGEREGISTRYADDRESS }}
+          username: ${{ env.ALIYUNIMAGEREGISTRYPASSWORD }}
+          password: ${{ env.ALIYUNIMAGEREGISTRYUSERNAME }}
