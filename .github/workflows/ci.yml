@@ -27,7 +27,7 @@ jobs:
 #        run: mvn --batch-mode --update-snapshots verify
   # 步骤二 构建jar包
   package:
-    needs: job1
+    #needs: job1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
