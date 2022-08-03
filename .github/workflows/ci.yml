@@ -14,11 +14,27 @@ jobs:
           registry: ${{ secrets.ALIYUN_IMAGE_REGISTRY_ADDRESS }}
           username: ${{ secrets.ALIYUN_IMAGE_REGISTRY_PASSWORD }}
           password: ${{ secrets.ALIYUN_IMAGE_REGISTRY_USERNAME }}
-  # 根据dockerfile构建镜像并发布到镜像仓库
-  publish-image:
-    #needs: [login-registry,package]
+  # 构建jar包
+  package:
+    #needs: job1
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Run the Maven verify phase
+        run: mvn --batch-mode --update-snapshots package
+  # 根据dockerfile构建镜像并发布到镜像仓库
+  publish-image:
+    needs: [login-registry,package]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/build-push-action@v3
       - name: Build and push
-        run: |
-         echo | ls
+        with:
+          context: .
+          push: true
+          tags: github-action-demo:latest
