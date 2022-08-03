@@ -28,7 +28,7 @@ jobs:
       - name: Run the Maven verify phase
         run: mvn --batch-mode --update-snapshots package
   job3:
-    #needs: [job1,job2]
+    needs: [job1,job2]
     runs-on: ubuntu-latest
     steps:
       - name: Login to Aliyun image registry
