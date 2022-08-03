@@ -1,7 +1,7 @@
 FROM openjdk:8-jre-alpine
 MAINTAINER lksun.cn
 
-ADD ./target/*.jar root.jar
+ADD ../../target/*.jar root.jar
 
 
 ENV TZ=Asia/Shanghai
