@@ -21,4 +21,4 @@ jobs:
     steps:
       - name: Build and push
         run: |
-          cat /Dockerfile
+         echo | ls
