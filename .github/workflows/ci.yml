@@ -4,8 +4,8 @@ on:
     branches:
       - master
 jobs:
-  # 登录阿里云容器仓库
-  login-registry:
+  # 根据dockerfile构建镜像并发布到镜像仓库
+  job1:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Aliyun image registry
@@ -14,12 +14,6 @@ jobs:
           registry: ${{ secrets.ALIYUN_IMAGE_REGISTRY_ADDRESS }}
           username: ${{ secrets.ALIYUN_IMAGE_REGISTRY_PASSWORD }}
           password: ${{ secrets.ALIYUN_IMAGE_REGISTRY_USERNAME }}
-
-  # 根据dockerfile构建镜像并发布到镜像仓库
-  publish-image:
-    needs: [login-registry]
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
