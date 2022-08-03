@@ -33,6 +33,6 @@ jobs:
       - name: Login to Aliyun image registry
         uses: docker/login-action@v2
         with:
-          registry: ${{ secrets.AliyunImageRegistry.ADDRESS }}
-          username: ${{ secrets.AliyunImageRegistry.PASSWORD }}
-          password: ${{ secrets.AliyunImageRegistry.USERNAME }}
+          registry: ${{ secrets.ALIYUN_IMAGE_REGISTRY_ADDRESS }}
+          username: ${{ secrets.ALIYUN_IMAGE_REGISTRY_PASSWORD }}
+          password: ${{ secrets.ALIYUN_IMAGE_REGISTRY_USERNAME }}
