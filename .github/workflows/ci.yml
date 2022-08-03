@@ -31,9 +31,6 @@ jobs:
     needs: [login-registry,package]
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
