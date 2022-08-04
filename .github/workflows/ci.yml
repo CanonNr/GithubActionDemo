@@ -23,16 +23,21 @@ jobs:
           distribution: 'adopt'
       # 执行打包操作
       - run: mvn --batch-mode --update-snapshots package
-      # 设置镜像原信息
+      # 设置镜像原信息,包括镜像名和版本号
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
+        # 这里的参数可以参考 https://github.com/docker/metadata-action
         with:
+          # 镜像名一般固定写死
           images: registry.cn-hangzhou.aliyuncs.com/lksun-test/github-action-demo
+          # metadata-action 为我们提供了多种命名规则
+          tags: |
+            type=raw,value={{branch}}-{{date 'YYYYMMDDhhmmss'}}
       # 推送镜像
       - uses: docker/build-push-action@v3
+        # 这里的参数可以参考 https://github.com/docker/build-push-action#customizing
         with:
-          # 这里的参数可以参考 https://github.com/docker/build-push-action#customizing
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
